@@ -1,8 +1,19 @@
+import { ApiProperty } from "@nestjs/swagger";
+
 export class CreateGameDto {
-    title: string; 
+    @ApiProperty()
+    title: string;
+    
+    @ApiProperty()
     price: number;
+
+    @ApiProperty()
     tags: string[];
-    releaseDate:Date;
+
+    @ApiProperty()
+    releaseDate: Date;
+
+    @ApiProperty()
     publisher: {
         id: number,
         name: string, 
