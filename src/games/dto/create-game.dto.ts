@@ -1,5 +1,15 @@
 import { ApiProperty } from "@nestjs/swagger";
 
+class PublisherProperties {
+    @ApiProperty()
+    id: number;
+    @ApiProperty()
+    name: string;
+    @ApiProperty()
+    siret: number
+    @ApiProperty()
+    phone: string
+}
 export class CreateGameDto {
     @ApiProperty()
     title: string;
@@ -14,10 +24,6 @@ export class CreateGameDto {
     releaseDate: Date;
 
     @ApiProperty()
-    publisher: {
-        id: number,
-        name: string, 
-        siret: number, 
-        phone: string
-    }; 
+    publisher: PublisherProperties
 }
+
