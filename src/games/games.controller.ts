@@ -4,7 +4,8 @@ import { CreateGameDto } from './dto/create-game.dto';
 
 import { Game } from './schemas/game.schema';
 import { GamesService } from './games.service';
-
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('games')
 @Controller('/games')
 export class GamesController {
   constructor(private readonly gamesService: GamesService) {}
