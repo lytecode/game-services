@@ -11,11 +11,16 @@ export class GamesService {
   constructor(@InjectModel(Game.name) private gameModel: Model<GameDocument>) {}
 
   async getGameById(gameId: string): Promise<Game> {
+    let game;
     try{ 
-      return await this.gameModel.findById(gameId).exec();
+      game = await this.gameModel.findById(gameId).exec();
     } catch (error) {
       throw new NotFoundException('No game found');
     }
+
+    if(game === null) throw new NotFoundException('No game found');
+
+    return game;
   }
 
   async createGame(createGameDto: CreateGameDto): Promise<Game> {
@@ -60,5 +65,37 @@ export class GamesService {
       throw new BadRequestException('Cannot find game or publisher with the given id')
     }
     
+  }
+
+  async deleteGame(gameId: string):Promise<{ message: string}> {
+    let game;
+    try {
+      game = await this.gameModel.deleteOne({ _id: gameId });
+    } catch (error) {
+      throw new NotFoundException('No game found');
+    }
+
+    if(game.n < 1) throw new BadRequestException("No game exist with the given id")
+
+    return { message: "Game deleted successfully"}
+  }
+
+  async discountAndDeleteOldGames(): Promise<{ message: string }>{
+    const _12MonthsAgo = new Date(new Date().setMonth(new Date().getMonth() - 12));
+    const _18MonthsAgo =  new Date(new Date().setMonth(new Date().getMonth() - 18));
+
+    await this.gameModel.deleteMany({ releaseDate: { $lt: _18MonthsAgo } }).exec();
+
+    const discountGames =  await this.gameModel.find({ releaseDate: { $gt: _18MonthsAgo, $lt: _12MonthsAgo}}).exec();
+    
+    //apply 20% discount
+    discountGames.forEach( async (game) => {
+        const newPrice = game.price - (0.2 * game.price);
+        game.price = newPrice;
+
+        await game.save();
+    })
+
+    return { message: 'Request processed successfully' }
   }
 }

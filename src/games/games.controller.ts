@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { CreateGameDto } from './dto/create-game.dto';
 import { UpdateGameDto } from './dto/update-game.dto';
 
@@ -33,6 +33,16 @@ export class GamesController {
   @Get(':id/publisher')
   async getPublisher(@Param('id') gameId: string): Promise<{id: number, name: string, siret: number, phone: string}> {
     return this.gamesService.getPublisher(gameId)
+  }
+
+  @Delete(':id')
+  async deleteGame(@Param('id') gameId: string): Promise<{ message: string }> {
+    return this.gamesService.deleteGame(gameId)
+  }
+
+  @Delete('/discount/old-games')
+  async discountAndDeleteOldGames(): Promise<{ message: string }> {
+    return this.gamesService.discountAndDeleteOldGames();
   }
 
 }
