@@ -32,7 +32,7 @@ export class GamesService {
   }
 
   async getGames(): Promise<Game[]> {
-    return await this.gameModel.find().exec();
+    return await this.gameModel.find();
   }
 
   async updateGame(gameId: string, gameUpdates: UpdateGameDto): Promise<Game> {
