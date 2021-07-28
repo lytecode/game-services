@@ -30,8 +30,8 @@ describe('GamesController', () => {
       }
     }),
 
-    updateGame: jest.fn(( title, price, tags, releaseDate, publisher) => {
-      return { title, price, tags, releaseDate, publisher}
+    updateGame: jest.fn((id, dto) => {
+      return {_id: id, ...dto}
     }),
 
     deleteGame: jest.fn((id) => {
@@ -99,20 +99,20 @@ describe('GamesController', () => {
     })
   }) 
   
-//   describe("Update Game", () => {
-//     it("should update a single Game", async() => {
-//       const expected = { 
-//         id: '12345',
-//         title: "Resident Evil", 
-//         price: 4000, 
-//         tags: ['Capcom', 'Adventure'], 
-//         releaseDate: new Date('01/21/2018'), 
-//         publisher: {  id: 1, name: "Capcom", siret: 310, phone: "08123399933239"}
-//       };
-//       const updated = await gameController.updateGame('12345', { title: "Resident Evil",price: 4000,tags: ['Capcom', 'Adventure'], releaseDate: new Date('01/21/2018'), publisher: {  id: 1, name: "Capcom", siret: 310, phone: "08123399933239"} })
-//       expect(updated).toMatchObject(expected)
-//     })
-//   })
+  describe("Update Game", () => {
+    it("should update a single Game", async() => {
+      const expected = { 
+        _id: '12345',
+        title: "Resident Evil", 
+        price: 4000, 
+        tags: ['Capcom', 'Adventure'], 
+        releaseDate: new Date('01/21/2018'), 
+        publisher: {  id: 1, name: "Capcom", siret: 310, phone: "08123399933239"}
+      };
+      const updated = await gameController.updateGame('12345', { title: "Resident Evil",price: 4000,tags: ['Capcom', 'Adventure'], releaseDate: new Date('01/21/2018'), publisher: {  id: 1, name: "Capcom", siret: 310, phone: "08123399933239"} })
+      expect(updated).toEqual(expected)
+    })
+  })
 
   describe('Delete game', () => {
     it('should delete a game', async() => {
