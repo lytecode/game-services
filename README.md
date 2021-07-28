@@ -24,45 +24,63 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Games microservice using [Nest](https://github.com/nestjs/nest) framework.
+
+## This project users yarn
 
 ## Installation
 
+Go to the root of the application and run
+
 ```bash
-$ npm install
+$ yarn
 ```
 
 ## Running the app
 
 ```bash
 # development
-$ npm run start
+$ yarn start
 
 # watch mode
-$ npm run start:dev
+$ yarn start:dev
 
 # production mode
-$ npm run start:prod
+$ yarn start:prod
 ```
 
 ## Test
 
 ```bash
 # unit tests
-$ npm run test
+$ yarn test
 
 # e2e tests
-$ npm run test:e2e
+$ yarn test:e2e
 
 # test coverage
-$ npm run test:cov
+$ yarn test:cov
 ```
+
+## APIs start with
+
+```
+BASE_URL/api/v1/games
+```
+
+## API Swagger documentation can be found at BASE_URL/api/v1
+
+`http://localhost:5000/api/v1/`
 
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
 ## Stay in touch
+
+- Author - [Mbonu Basil](https://linkledin.com/in/mbonubasil)
+
+## Credit to
 
 - Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
 - Website - [https://nestjs.com](https://nestjs.com/)
