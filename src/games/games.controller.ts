@@ -26,7 +26,7 @@ export class GamesController {
   }
 
   @Patch(':id')
-  async updateUser(@Param('id') gameId: string, @Body() updateGameDto: UpdateGameDto): Promise<Game> {
+  async updateGame(@Param('id') gameId: string, @Body() updateGameDto: UpdateGameDto): Promise<Game> {
     return this.gamesService.updateGame(gameId, updateGameDto);
   }
 
